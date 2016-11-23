@@ -8,7 +8,7 @@ BOT_ID = os.environ.get("BOT_ID")
 
 # constants
 AT_BOT = "<@" + BOT_ID + ">"
-EXAMPLE_COMMAND = "I havent been this scared"
+EXAMPLE_COMMAND = "blink"
 
 # instantiate Slack and Twilio clients
 slack_client = SlackClient(os.environ.get('SLACK_BOT_TOKEN'))
@@ -22,7 +22,18 @@ def handle_command(command, channel):
     response = "Not sure what you mean. Use the *" + EXAMPLE_COMMAND + \
                "* command with numbers, delimited by spaces."
     if command.startswith(EXAMPLE_COMMAND):
-        response = "in a long time, and I'm so unprepared."
+        response = "I haven't been this scared in a long time\n" \
+                   "And I'm so unprepared so here's your valentine\n" \
+                   "Bouquet of clumsy words, a simple melody\n" \
+                   "This world's an ugly place, but you're so beautiful to me\n\n" \
+                   \
+                   "I'll think about the times\n" \
+                   "She kissed me after class\n" \
+                   "And she put up with my friends" \
+                   "I acted like an ass\n" \
+                   "I'd ditch my lecture to watch the girls play soccer\n" \
+                   "Is my picture still hanging in her locker?\n"
+
     slack_client.api_call("chat.postMessage", channel=channel,
                           text=response, as_user=True)
 
